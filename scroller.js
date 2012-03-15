@@ -76,10 +76,13 @@ function LoadCallback(req)
 		if (element.type == 'image') {
 			var newImageContainer = document.createElement('div');
 			newImageContainer.setAttribute('class', 'entry');
+			var link = document.createElement('a');
+			link.setAttribute('href', element.name);
 			var newImage = document.createElement('img');
 			newImage.setAttribute('src', element.url);
 			newImage.setAttribute('class', 'content');
-			newImageContainer.appendChild(newImage);
+			link.appendChild(newImage)
+			newImageContainer.appendChild(link);
 			el.appendChild(newImageContainer);
 		}
 		if (element.type == 'post') {

@@ -1,7 +1,6 @@
 import os
 import itertools
 
-
 def inputdirectory():
 	import sys
 	return sys.argv[1]
@@ -17,7 +16,7 @@ def toPng(jpeg):
 	return jpeg[0:len(jpeg)-3]+"png"
 
 def format(jpeg):
-	return {"type": "image", "name": jpeg, "url": "images/" + toPng(jpeg)}
+	return {"type": "image", "name": "images/" + jpeg, "url": "images/" + toPng(jpeg)}
 
 def writeTo(counter):
 	import io
