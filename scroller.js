@@ -77,9 +77,19 @@ function renderGroup(group) {
 	return content;
 }
 
+function renderResponse(response) {
+	var json = JSON.parse(response)
+	var data = json.data;
+	var el = document.getElementById('scrollContainer');
+	
+	el.appendChild(renderEntry(renderGroup(json.group)))
+	for (var i = 0; i < data.length; i++) {
+		el.appendChild(renderEntry(renderImage(data[i])));
+	}
+}
+
 function LoadCallback(req)
 {
-	var el = document.getElementById('scrollContainer');
 	var loading = document.getElementById('loadingDiv');
 	
 	if (req.readyState != 4) {
@@ -88,13 +98,7 @@ function LoadCallback(req)
 
 	NumberOfNewEntrySets--;
 	loading.style.display = 'none';
-	var json = JSON.parse(req.responseText)
-	var data = json.data;
-	
-	el.appendChild(renderEntry(renderGroup(json.group)))
-	for (var i = 0; i < data.length; i++) {
-		el.appendChild(renderEntry(renderImage(data[i])));
-	}
+	renderResponse(req.responseText)
 	
 	OnDivScroll();
 }
