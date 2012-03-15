@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Scroller</title>
+		<style type="text/css">
+			.entry {
+				height:15em;
+				width:15em;
+				float:left;
+				text-align:center;
+				margin-top:auto;
+				margin-bottom:auto;
+				border-collapse:collapse;
+				padding:0.1em;
+				overflow:hidden;
+			}
+			.content {
+				max-height:14em;
+				max-width:14em;
+				margin:auto;
+				border:solid 1px #555555;
+				overflow-y:auto;
+			}
+	    </style>
+		<script type="text/javascript" src="scroller.js"></script>
+	</head>
+	<body style="background-color:black;color:#cccccc;">
+		<div style="display:block;position:absolute;overflow-y:auto;height:100%;width:100%;text-align:center"
+			onscroll="OnDivScroll();" id="scrollContainer">
+		</div>
+		<div id="loadingDiv" style="position:absolute;bottom:2px;right:20px; padding:5px;display:none;background-color:Black;color:White;">Loading...</div>
+	</body>
+	<script type="text/javascript">Start(5);</script>
+</html>
