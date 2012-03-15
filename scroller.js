@@ -60,6 +60,23 @@ function renderEntry(entry) {
 	return container;
 }
 
+function renderImage(image) {
+	var link = document.createElement('a');
+	link.setAttribute('href', image.name);
+	var newImage = document.createElement('img');
+	newImage.setAttribute('src', image.url);
+	newImage.setAttribute('class', 'content');
+	link.appendChild(newImage);
+	return link;
+}
+
+function renderGroup(group) {
+	var content = document.createElement('div');
+	content.setAttribute('class', 'content');
+	content.innerHTML = '<p>'+Year(group)+'</p><p style="color:red;font-size:large">'+Day(group)+'</p><p>'+Month(group)+'</p>';
+	return content;
+}
+
 function LoadCallback(req)
 {
 	var el = document.getElementById('scrollContainer');
@@ -73,22 +90,10 @@ function LoadCallback(req)
 	loading.style.display = 'none';
 	var json = JSON.parse(req.responseText)
 	var data = json.data;
-	var date = json.group
-	var groupContainer = document.createElement('div');
-	groupContainer.setAttribute('class', 'entry');
-	groupContainer.innerHTML = '<div class="content"><p>'+Year(date)+'</p><p style="color:red;font-size:large">'+Day(date)+'</p><p>'+Month(date)+'</p></div>';
-	el.appendChild(groupContainer)
+	
+	el.appendChild(renderEntry(renderGroup(json.group)))
 	for (var i = 0; i < data.length; i++) {
-		var element = data[i];
-		
-		var link = document.createElement('a');
-		link.setAttribute('href', element.name);
-		var newImage = document.createElement('img');
-		newImage.setAttribute('src', element.url);
-		newImage.setAttribute('class', 'content');
-		link.appendChild(newImage)
-		
-		el.appendChild(renderEntry(link));
+		el.appendChild(renderEntry(renderImage(data[i])));
 	}
 	
 	OnDivScroll();
