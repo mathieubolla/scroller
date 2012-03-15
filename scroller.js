@@ -53,6 +53,13 @@ function Day(date) {
 	return date.substring(8,10)
 }
 
+function renderEntry(entry) {
+	var container = document.createElement('div');
+	container.setAttribute('class', 'entry');
+	container.appendChild(entry);
+	return container;
+}
+
 function LoadCallback(req)
 {
 	var el = document.getElementById('scrollContainer');
@@ -73,24 +80,15 @@ function LoadCallback(req)
 	el.appendChild(groupContainer)
 	for (var i = 0; i < data.length; i++) {
 		var element = data[i];
-		if (element.type == 'image') {
-			var newImageContainer = document.createElement('div');
-			newImageContainer.setAttribute('class', 'entry');
-			var link = document.createElement('a');
-			link.setAttribute('href', element.name);
-			var newImage = document.createElement('img');
-			newImage.setAttribute('src', element.url);
-			newImage.setAttribute('class', 'content');
-			link.appendChild(newImage)
-			newImageContainer.appendChild(link);
-			el.appendChild(newImageContainer);
-		}
-		if (element.type == 'post') {
-			var newPostContainer = document.createElement('div');
-			newPostContainer.setAttribute('class', 'entry');
-			newPostContainer.innerHTML = '<div class="content">'+element.content+'</div>';
-			el.appendChild(newPostContainer);
-		}
+		
+		var link = document.createElement('a');
+		link.setAttribute('href', element.name);
+		var newImage = document.createElement('img');
+		newImage.setAttribute('src', element.url);
+		newImage.setAttribute('class', 'content');
+		link.appendChild(newImage)
+		
+		el.appendChild(renderEntry(link));
 	}
 	
 	OnDivScroll();
